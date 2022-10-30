@@ -1,25 +1,61 @@
-import logo from './logo.svg';
+import svg_0 from './materials/number_0.svg';
+import svg_1 from './materials/number_1.svg';
+import svg_2 from './materials/number_2.svg';
+import svg_3 from './materials/number_3.svg';
+import svg_4 from './materials/number_4.svg';
+import svg_5 from './materials/number_5.svg';
+import svg_6 from './materials/number_6.svg';
+import svg_7 from './materials/number_7.svg';
+import svg_8 from './materials/number_8.svg';
+import svg_9 from './materials/number_9.svg';
 import './App.css';
+import { motion } from "framer-motion";
+
+export class numberSvg {
+  constructor(name, svg) {
+    this.name = name;
+    this.svg = svg;
+  }
+}
+
+
+const Number = (props) => {
+    return(
+      <>
+        <motion.img
+        className='img'
+        src={props.svg} 
+        alt='number'
+        initial={{ scale: 0 }}
+        animate={{ rotate: 360, scale: 1 }}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20
+        }}/>
+      </>);
+  }
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  const svgs = [svg_0, 
+                svg_1, 
+                svg_2, 
+                svg_3, 
+                svg_4, 
+                svg_5, 
+                svg_6, 
+                svg_7, 
+                svg_8, 
+                svg_9]
+const listItems = svgs.map(
+                      (svg) => <Number svg={svg}/>
+                      );
+  return(
+    <div>
+      {listItems}
     </div>
-  );
+)
 }
 
 export default App;

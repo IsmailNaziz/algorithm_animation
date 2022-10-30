@@ -10,6 +10,7 @@ import svg_8 from './materials/number_8.svg';
 import svg_9 from './materials/number_9.svg';
 import './App.css';
 import { motion } from "framer-motion";
+import { useState } from 'react';
 
 export class numberSvg {
   constructor(name, svg) {
@@ -28,6 +29,7 @@ const Number = (props) => {
         alt='number'
         initial={{ scale: 0 }}
         animate={{ rotate: 360, scale: 1 }}
+        onClick={() => alert('Hello')}
         transition={{
           type: "spring",
           stiffness: 260,
@@ -48,12 +50,24 @@ function App() {
                 svg_7, 
                 svg_8, 
                 svg_9]
-const listItems = svgs.map(
-                      (svg) => <Number svg={svg}/>
-                      );
-  return(
+  const [rotate, SetRotate] = useState(false)
+  const [scale, SetScale] = useState(false)
+  const listItems = svgs.map((svg) => <Number svg={svg} rotate={rotate} setter_rotate={SetRotate}/>);
+
+return(
     <div>
-      {listItems}
+      <motion.img
+        className='img'
+        src={svg_2} 
+        alt='number'
+        initial={{ scale: 0 }}
+        animate={{ rotate: rotate?360:0, scale: scale? 5 : 1 }}
+        onClick={() => SetRotate(!rotate) & SetScale(!scale)}
+        transition={{
+          type: "spring",
+          stiffness: 260,
+          damping: 20
+        }}/>
     </div>
 )
 }
